@@ -10,7 +10,7 @@ export class HomePage {
   constructor(private navCtrl: NavController) { }
 
 comecar(){
-  this.navCtrl.navigateForward('tabs');
+  this.navCtrl.navigateForward('tabs/principal');
 }
 
 }

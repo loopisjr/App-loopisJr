@@ -3,14 +3,29 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
 
+import { IonicModule } from '@ionic/angular';
+ 
 import { TabsPage } from './tabs.page';
 
-const routes: Routes = [
+const routes:Routes=[
   {
     path: '',
-    component: TabsPage
+    component: TabsPage,
+    children: [
+      {
+        path: 'principal',
+        loadChildren: '../principal/principal.module#PrincipalPageModule'
+      },
+      {
+        path: 'projetos',
+        loadChildren: '../projetos/projetos.module#ProjetosPageModule'
+      },
+      {
+        path: 'funcionarios',
+        loadChildren: '../funcionarios/funcionarios.module#FuncionariosPageModule'
+      }
+    ]
   }
 ];
 

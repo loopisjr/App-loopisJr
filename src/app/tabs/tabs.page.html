@@ -8,55 +8,25 @@
 </ion-header>
 
 <ion-content padding>
-
   <ion-tabs>
 
-    <!--<ion-tab-button tab="principal">
-      <ion-router-outlet name="principal"></ion-router-outlet>
-
-    </ion-tab-button>
-
-    <ion-tab-button tab="funcionarios">
-
-      <ion-router-outlet name="funcionarios"></ion-router-outlet>
-
-    </ion-tab-button>
-
-    <ion-tab-button tab="projetos">
-
-      <ion-router-outlet name="projetos"></ion-router-outlet>
-
-    </ion-tab-button>-->
-
-
     <ion-tab-bar slot="bottom">
-
+      <ion-tab-button tab="funcionarios">
+        <ion-icon name="people"></ion-icon>
+        <ion-label>Funcionário</ion-label>
+      </ion-tab-button>
+      
       <ion-tab-button tab="principal" >
-        <ion-router-outlet name="principal"></ion-router-outlet>
-
-        <ion-icon name="flash"></ion-icon>
-
-        <ion-label>Tab One</ion-label>
-
+        <ion-icon name="attach"></ion-icon>
+        <ion-label>Principal</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="funcionarios" href="/tabs/(funcionarios:funcionarios)">
-
-        <ion-icon name="apps"></ion-icon>
-
-        <ion-label>Tab Two</ion-label>
-
+      <ion-tab-button tab="projetos">
+        <ion-icon name="grid"></ion-icon>
+        <ion-label>Projetos</ion-label>
       </ion-tab-button>
-
-      <ion-tab-button tab="projetos" href="/tabs/(projetos:projetos)">
-
-        <ion-icon name="send"></ion-icon>
-
-        <ion-label>Tab Three</ion-label>
-
-      </ion-tab-button>
-
     </ion-tab-bar>
 
   </ion-tabs>
 </ion-content>
+
