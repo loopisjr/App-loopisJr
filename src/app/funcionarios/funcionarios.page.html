@@ -1,3 +1,12 @@
 <ion-content padding>
-  
+    <!-- <p *ngIf="heroes.length > 3">There are many heroes!</p> -->
+    <!-- *ngFor="let hero of heroes" -->
+    <ion-list lines="full">
+        <ion-item *ngFor="let item of itens">
+            <ion-label>
+              <h5>Nome : {{item.name}}</h5>
+              <p>Email : {{item.email}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
 </ion-content>
