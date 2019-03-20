@@ -8,11 +8,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ComponentModalAdicionarEventoPageModule } from './component-modal-adicionar-evento/component-modal-adicionar-evento.module'
+// import { ComponentModalAdicionarEventoPage } from './component-modal-adicionar-evento/component-modal-adicionar-evento.page'
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentModalAdicionarEventoPageModule],
   providers: [
     StatusBar,
     SplashScreen,

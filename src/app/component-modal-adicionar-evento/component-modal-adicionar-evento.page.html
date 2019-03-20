@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button (click)="fechar()">Fechar</ion-button>
+    </ion-buttons>
+    <ion-title>Adicionar novo Evento</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-card>
+  <ion-col>
+    <ion-item>
+      <ion-label type="text" required="true" minlength="7" position="stacked">Evento</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label required="true" type="date" position="stacked">Data</ion-label>
+      <ion-input type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label required="true" type="time" position="stacked">Hora</ion-label>
+      <ion-input type="Time"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label type="text" position="stacked">Descrição</ion-label>
+      <ion-textarea rows="" cols="20" placeholder="Comente sobre o evento"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="salvar()">Enviar<ion-icon name="send"></ion-icon></ion-button>
+    </ion-item>
+  </ion-col>
+</ion-card>
+  
+</ion-content>
