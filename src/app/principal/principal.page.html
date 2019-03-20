@@ -1,3 +1,51 @@
 <ion-content padding>
-
+    <ion-grid>
+        <ion-card>
+            <ion-card-header>
+                    <ion-row>
+                        <ion-col>
+                            <ion-card-subtitle>
+                                11/04/2019 09:45
+                            </ion-card-subtitle>
+                        </ion-col>
+                        <ion-col offset="6">
+                            <ion-icon name="megaphone" size="large"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row> 
+                        <ion-card-title> Reunião</ion-card-title>
+                    </ion-row>
+            </ion-card-header>
+            <ion-card-content padding>
+                <p>Informações:</p>
+                Levantamento de requisitos do projeto HTTP.
+            </ion-card-content>        
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                <ion-row>
+                    <ion-col>
+                        <ion-card-subtitle>
+                            13/04/2019 14:30
+                        </ion-card-subtitle>
+                    </ion-col>
+                    <ion-col offset="6">
+                        <ion-icon name="megaphone" size="large"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row> 
+                    <ion-card-title> Reunião</ion-card-title>
+                </ion-row>
+            </ion-card-header>
+            <ion-card-content padding>
+                <p>Informações:</p>
+                Considerações da sprint 4 do projeto WYK.
+            </ion-card-content>        
+        </ion-card>
+        <ion-row>
+            <ion-col offset="5">
+                <ion-icon size="large" (click)="adicionarEvento()" name="add-circle-outline"></ion-icon>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
