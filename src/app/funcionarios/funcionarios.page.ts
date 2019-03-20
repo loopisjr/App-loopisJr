@@ -27,4 +27,7 @@ export class FuncionariosPage implements OnInit {
     });
 
   }
+  verUsuario(id : BigInteger){
+    console.log(id)
+  }
 }
