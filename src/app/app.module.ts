@@ -12,10 +12,12 @@ import { ComponentModalAdicionarEventoPageModule } from './component-modal-adici
 // import { ComponentModalAdicionarEventoPage } from './component-modal-adicionar-evento/component-modal-adicionar-evento.page'
 
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentModalAdicionarEventoPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentModalAdicionarEventoPageModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
