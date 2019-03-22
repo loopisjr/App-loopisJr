@@ -9,25 +9,28 @@
 <ion-content padding>
   <ion-card>
   <ion-col>
+  <form (ngSubmit)="cadastrar()" [formGroup]="form">
     <ion-item>
-      <ion-label type="text" required="true" minlength="7" position="stacked">Evento</ion-label>
-      <ion-input></ion-input>
+      <ion-label  type="text" required="true" minlength="7" position="stacked">Evento</ion-label>
+      <ion-input formControlName="titulo"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label required="true" type="date" position="stacked">Data</ion-label>
-      <ion-input type="date"></ion-input>
+      <ion-label position="stacked">Data</ion-label>
+      <ion-input formControlName="data" type="date"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label required="true" type="time" position="stacked">Hora</ion-label>
-      <ion-input type="Time"></ion-input>
+      <ion-label  required="true" position="stacked">Hora</ion-label>
+      <ion-input formControlName="hora" type="Time"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label type="text" position="stacked">Descrição</ion-label>
-      <ion-textarea rows="" cols="20" placeholder="Comente sobre o evento"></ion-textarea>
+      <ion-label position="stacked">Descrição</ion-label>
+      <ion-textarea formControlName="descricao" rows="" cols="20" placeholder="Comente sobre o evento"></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-button (click)="salvar()">Enviar<ion-icon name="send"></ion-icon></ion-button>
+      <ion-button (click)="limpar()">Limpar</ion-button>
+      <ion-button slot="end" [disabled]="form.invalid" type="submit" >Enviar<ion-icon name="send"></ion-icon></ion-button>
     </ion-item>
+  </form>
   </ion-col>
 </ion-card>
   
