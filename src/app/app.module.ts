@@ -13,11 +13,19 @@ import { ComponentModalAdicionarEventoPageModule } from './component-modal-adici
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentModalAdicionarEventoPageModule, HttpClientModule],
+  imports: [BrowserModule,
+            IonicModule.forRoot(),
+            AppRoutingModule,
+            ComponentModalAdicionarEventoPageModule,
+            HttpClientModule,
+            ReactiveFormsModule,
+            // DataFormModule
+          ],
   providers: [
     StatusBar,
     SplashScreen,
