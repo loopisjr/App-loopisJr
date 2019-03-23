@@ -23,7 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
             AppRoutingModule,
             ComponentModalAdicionarEventoPageModule,
             HttpClientModule,
-            ReactiveFormsModule,
+            ReactiveFormsModule
             // DataFormModule
           ],
   providers: [
