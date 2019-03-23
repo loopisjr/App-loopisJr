@@ -1,4 +1,3 @@
-import { Funcionario } from './../update-funcionarios/update-funcionarios.page';
 import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
