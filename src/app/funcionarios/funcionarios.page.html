@@ -1,15 +1,27 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Loopis</ion-title>
+    </ion-toolbar>
+</ion-header>
+          
 <ion-content padding>
-    <ion-list lines="full">
-        <ion-item *ngFor="let item of itens">
-            <ion-label slot="start">
-                <h5>Nome : {{item.name}}</h5>
-                <p>Email : {{item.email}}</p>
+    <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+        <ion-fab-button (click)="redirecionarPagina('cadastrar', '')">
+            <ion-icon name="person-add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <ion-list>
+        <ion-item *ngFor="let funcionario of funcionarios">
+            <ion-label>
+                <h5>Nome : {{funcionario.nome}}</h5>
+                <p>Cargo : {{funcionario.cargo}}</p>
             </ion-label>
             <ion-buttons slot="end">
-                <ion-button color="ligth" (click)="verUsuario(item.id)">
+                <ion-button color="ligth" (click)="redirecionarPagina('atualizar', funcionario.email)">
                     <ion-icon name="eye"></ion-icon>
                 </ion-button>
             </ion-buttons>
         </ion-item>
     </ion-list>
+    
 </ion-content>

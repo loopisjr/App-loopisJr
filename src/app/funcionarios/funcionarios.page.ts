@@ -1,5 +1,5 @@
 import { NavController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,24 +10,31 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./funcionarios.page.scss']
 })
 export class FuncionariosPage implements OnInit {
-  
-  public itens:any;
-  constructor(public navCtrl:NavController, public http:HttpClient) {
+
+  funcionarios: any;
+  // email: string;
+  constructor(public navCtrl: NavController, public http: HttpClient) {
     this.getDados();
   }
-  
+
   ngOnInit() {
   }
 
-  getDados(){
-    let url='http://localhost:8081/funcionarios/';
+  getDados() {
+    let url = 'http://localhost:8081/funcionarios/';
     let dado: Observable<any> = this.http.get(url);
     dado.subscribe(result => {
-      this.itens = result
+      this.funcionarios = result
     });
 
   }
-  verUsuario(id : BigInteger){
-    console.log(id)
+  redirecionarPagina(acao: string, email: string) {
+    if (acao == "cadastrar") {
+      this.navCtrl.navigateForward(`update-funcionarios/${null}`);
+    } 
+    else if (acao == "atualizar") {
+      console.log(email)
+      this.navCtrl.navigateForward(`update-funcionarios/${email}`);
+    }
   }
 }
