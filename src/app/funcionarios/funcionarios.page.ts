@@ -20,7 +20,7 @@ export class FuncionariosPage implements OnInit {
   }
 
   getDados(){
-    let url='https://jsonplaceholder.typicode.com/users';
+    let url='http://localhost:8081/funcionarios/';
     let dado: Observable<any> = this.http.get(url);
     dado.subscribe(result => {
       this.itens = result
