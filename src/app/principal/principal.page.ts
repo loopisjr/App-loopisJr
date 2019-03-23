@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import {ComponentModalAdicionarEventoPage} from '../component-modal-adicionar-evento/component-modal-adicionar-evento.page'
 
-
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
@@ -12,12 +11,15 @@ import {ComponentModalAdicionarEventoPage} from '../component-modal-adicionar-ev
 export class PrincipalPage implements OnInit {
 
   eventos: any;
+  root: boolean = true;
+
   constructor(
     private modalCtrl: ModalController,
     private http: HttpClient,
     private alert: AlertController
   ){
     this.eventos = this.iniciarEventos();
+    console.log(this.eventos)
   }
 
   ngOnInit() {
