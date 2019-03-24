@@ -30,11 +30,11 @@ export class FuncionariosPage implements OnInit {
   }
   redirecionarPagina(acao: string, email: string) {
     if (acao == "cadastrar") {
-      this.navCtrl.navigateForward(`update-funcionarios/" "`);
+      this.navCtrl.navigateForward(`update-funcionarios/${acao}/" "`);
     } 
     else if (acao == "atualizar") {
       console.log(email);
-      this.navCtrl.navigateForward(`update-funcionarios/${email}`);
+      this.navCtrl.navigateForward(`update-funcionarios/${acao}/${email}`);
     }
   }
 }

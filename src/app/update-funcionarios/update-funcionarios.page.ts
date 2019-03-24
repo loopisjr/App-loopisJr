@@ -4,8 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { when } from 'q';
-import { DISABLED } from '@angular/forms/src/model';
 
 
 @Component({
@@ -18,7 +16,7 @@ export class UpdateFuncionariosPage implements OnInit {
   formulario: FormGroup;
   funcionario: Funcionario;
   emailFuncionario = "";
-  updateMetodo = "Cadastrar";
+  updateMetodo = "";
   constructor(
     private formBuilder: FormBuilder, 
     public http: HttpClient, 
@@ -29,9 +27,10 @@ export class UpdateFuncionariosPage implements OnInit {
 
   ngOnInit() {
     this.emailFuncionario = this.ativatedRoute.snapshot.paramMap.get("email");
+    this.updateMetodo = this.ativatedRoute.snapshot.paramMap.get("acao");
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
-      email: new FormControl({value: null, disabled: true}, Validators.required),
+      email: new FormControl({value: null, disabled: (this.updateMetodo=="atualizar")}, Validators.required),
       senha: [null, [Validators.minLength(6), Validators.required]],
       senhaConfirmar: [null, [this.confirmaSenha("senha"), Validators.required]],
       cargo: [null, Validators.required],
@@ -39,27 +38,24 @@ export class UpdateFuncionariosPage implements OnInit {
       perfilGithub: [null, Validators.required],
       tipo: [false, Validators.required]
     });
-
-    this.buscarFuncionario();
+    if(this.updateMetodo=="atualizar"){
+      this.buscarFuncionario();
+    }
   }
 
   buscarFuncionario() {
     let url = 'http://localhost:8081/funcionarios/'.concat(this.emailFuncionario);
     let dado: Observable<any> = this.http.get(url);
     dado.subscribe(result => {
-      this.updateMetodo = "Cadastrar";
       this.funcionario = result;
-      if (result != null) {
-        this.updateMetodo = "Atualizar";
-        this.formulario.patchValue({
-          nome: result.nome,
-          email: result.email,
-          cargo: result.cargo,
-          habilidades: result.habilidades,
-          perfilGithub: result.perfilGithub,
-          tipo: (result.tipo == "ROOT")
-        });
-      }
+      this.formulario.patchValue({
+        nome: result.nome,
+        email: result.email,
+        cargo: result.cargo,
+        habilidades: result.habilidades,
+        perfilGithub: result.perfilGithub,
+        tipo: (result.tipo == "ROOT")
+      });
     });
   }
   
@@ -75,7 +71,7 @@ export class UpdateFuncionariosPage implements OnInit {
       tipo
     );
 
-    if(this.updateMetodo === "Cadastrar"){
+    if(this.updateMetodo === "cadastrar"){
       let url = 'http://localhost:8081/funcionarios/';
       let dado: Observable<any> = this.http.post(url, this.funcionario, { observe : 'response'});
       dado.subscribe( result => {
@@ -83,7 +79,7 @@ export class UpdateFuncionariosPage implements OnInit {
         this.navCtrl.navigateForward(`tabs/funcionarios`);
       }, 
       (error: any) => this.alertNestaPagina("Falha","Falha ao cadastrar funcionario."));
-    }else if(this.updateMetodo === "Atualizar"){
+    }else if(this.updateMetodo === "atualizar"){
       let url = 'http://localhost:8081/funcionarios/';
       let dado: Observable<any> = this.http.put(url, this.funcionario, { observe : 'response'});
       dado.subscribe( result => {
