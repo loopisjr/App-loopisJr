@@ -5,14 +5,14 @@
 </ion-header>
 
 <ion-content padding>
-  <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
+  <form (ngSubmit)="update()" [formGroup]="formulario">
     <ion-item>
       <ion-label type="text" position="floating">Nome</ion-label>
       <ion-input formControlName="nome"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label type="text" position="floating">Usuario Git</ion-label>
-      <ion-input formControlName="userGit"></ion-input>
+      <ion-input formControlName="perfilGithub"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label type="text" position="floating">Email</ion-label>
@@ -39,13 +39,13 @@
       <ion-input formControlName="projetos"></ion-input>
     </ion-item>-->
     <ion-item>
-      <ion-checkbox color="primary" formControlName="root" margin></ion-checkbox>
+      <ion-checkbox color="primary" formControlName="tipo" margin></ion-checkbox>
       <ion-label type="text">Root</ion-label>
     </ion-item>
     <ion-grid fixed>
       <ion-row>
         <ion-col size="6">
-          <ion-button type="submit" (click)=update()>Atualizar</ion-button>
+          <ion-button type="submit" [disabled]="formulario.invalid">Atualizar</ion-button>
         </ion-col>
         <ion-col size="6">
           <ion-button color="danger" type="submit">Remover</ion-button>
