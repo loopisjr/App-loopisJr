@@ -1,11 +1,19 @@
+<ion-header>
+    <ion-toolbar color="primary ">
+        <ion-title>
+            Eventos
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content padding>
     <ion-grid>
-        <ion-card>
+        <ion-card *ngFor="let evento of eventos">
             <ion-card-header>
                     <ion-row>
-                        <ion-col>
+                        <ion-col size="4">
                             <ion-card-subtitle>
-                                11/04/2019 09:45
+                                <ion-row>{{evento.data | date: 'dd/MM/yyyy'}}</ion-row>
+                                <ion-row>{{evento.hora}}</ion-row>
                             </ion-card-subtitle>
                         </ion-col>
                         <ion-col offset="6">
@@ -13,36 +21,15 @@
                         </ion-col>
                     </ion-row>
                     <ion-row> 
-                        <ion-card-title> Reunião</ion-card-title>
+                        <ion-card-title> {{evento.titulo}}</ion-card-title>
                     </ion-row>
             </ion-card-header>
             <ion-card-content padding>
                 <p>Informações:</p>
-                Levantamento de requisitos do projeto HTTP.
+                {{evento.descricao}}
             </ion-card-content>        
         </ion-card>
-        <ion-card>
-            <ion-card-header>
-                <ion-row>
-                    <ion-col>
-                        <ion-card-subtitle>
-                            13/04/2019 14:30
-                        </ion-card-subtitle>
-                    </ion-col>
-                    <ion-col offset="6">
-                        <ion-icon name="megaphone" size="large"></ion-icon>
-                    </ion-col>
-                </ion-row>
-                <ion-row> 
-                    <ion-card-title> Reunião</ion-card-title>
-                </ion-row>
-            </ion-card-header>
-            <ion-card-content padding>
-                <p>Informações:</p>
-                Considerações da sprint 4 do projeto WYK.
-            </ion-card-content>        
-        </ion-card>
-        <ion-row>
+        <ion-row *ngIf="root">
             <ion-col offset="5">
                 <ion-icon size="large" (click)="adicionarEvento()" name="add-circle-outline"></ion-icon>
             </ion-col>

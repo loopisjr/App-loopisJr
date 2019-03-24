@@ -41,17 +41,15 @@ export class ComponentModalAdicionarEventoPage implements OnInit {
   
   cadastrar(){
     let url = "http://localhost:8081/eventos/";
+    // let url = "https://httpbin.org/post";
     this.http.post(url,this.form.value,{ observe : 'response'}).subscribe(res => {
-      console.log(this.form.value);
-      console.log(res);
       //reseta os campos do form apos a requisição
       this.form.reset();
+      this.alertNestaPagina("Sucesso","Seu novo evento foi cadastrado!");
     },
     (error: any) => this.alertNestaPagina("Falha","Falha ao cadastrar evento."));
     
   }
-
-
 
   async alertNestaPagina(titulo,msg){
     const novoAlert = await this.alert.create({

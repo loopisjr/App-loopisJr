@@ -5,26 +5,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ComponentModalAdicionarEventoPage } from './component-modal-adicionar-evento.page';
+import { ModalAdicionarProjetoPage } from './modal-adicionar-projeto.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ComponentModalAdicionarEventoPage
+    component: ModalAdicionarProjetoPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
-  declarations: [
-    // DataFormComponent,
-    ComponentModalAdicionarEventoPage,
-  ]
+  declarations: [ModalAdicionarProjetoPage]
 })
-export class ComponentModalAdicionarEventoPageModule {}
+export class ModalAdicionarProjetoPageModule {}

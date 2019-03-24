@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <p slot="end" margin (click)="fechar()">FECHAR</p>
+    <ion-title>Adicionar Projeto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card padding>
+    <ion-col>
+      <form (ngSubmit)="adicionarProjeto()" [formGroup]="form">
+        <ion-item>
+          <ion-label position="stacked">Nome</ion-label>
+          <ion-input formControlName="titulo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Data de entrega</ion-label>
+          <ion-input formControlName="dataEntrega" type="date"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Telefone</ion-label>
+          <ion-input formControlName="telefone" placeholder="DDXXXXXXXX"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nome do contratante</ion-label>
+          <ion-input formControlName="nomeContratante"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Email do Contratante</ion-label>
+          <ion-input formControlName="emailContratante" type="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Descrição do projeto</ion-label>
+          <ion-input formControlName="descricao"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-button (click)="limpar()">Limpar</ion-button>
+          <ion-button slot="end" [disabled]="form.invalid" type="submit">Enviar <ion-icon name="send"></ion-icon></ion-button>
+        </ion-item>
+      </form>
+    </ion-col>
+  </ion-card>
+  </ion-content>

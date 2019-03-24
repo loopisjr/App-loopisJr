@@ -1,3 +1,26 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>
+            Projetos
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content padding>
-
+    <ion-card (click)="adicionarProjeto()" *ngIf="root" color="light">
+        <ion-icon class="addCenter" size="large" name="add-circle-outline"></ion-icon>
+    </ion-card>
+    <ion-card padding *ngFor="let projeto of projetos">
+        <ion-card-subtitle>
+            {{projeto.nomeContratante}}
+        </ion-card-subtitle>
+        <ion-card-title>
+            <b>{{projeto.titulo}}</b>
+        </ion-card-title>
+        <ion-card-content>
+            {{projeto.descricao}}
+            <ion-item slot="end">
+                <a href="#">{{projeto.emailContratante}}</a>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
