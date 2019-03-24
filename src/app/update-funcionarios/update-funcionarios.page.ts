@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { when } from 'q';
+import { DISABLED } from '@angular/forms/src/model';
 
 
 @Component({
@@ -30,9 +31,9 @@ export class UpdateFuncionariosPage implements OnInit {
     this.emailFuncionario = this.ativatedRoute.snapshot.paramMap.get("email");
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
-      email: [null, [Validators.email, Validators.required]],
+      email: new FormControl({value: null, disabled: true}, Validators.required),
       senha: [null, [Validators.minLength(6), Validators.required]],
-      senhaConfirmar: [null, [this.confirmaSenha("senha")]],
+      senhaConfirmar: [null, [this.confirmaSenha("senha"), Validators.required]],
       cargo: [null, Validators.required],
       habilidades: [null, Validators.required],
       perfilGithub: [null, Validators.required],
@@ -83,7 +84,12 @@ export class UpdateFuncionariosPage implements OnInit {
       }, 
       (error: any) => this.alertNestaPagina("Falha","Falha ao cadastrar funcionario."));
     }else if(this.updateMetodo === "Atualizar"){
-
+      let url = 'http://localhost:8081/funcionarios/';
+      let dado: Observable<any> = this.http.put(url, this.funcionario, { observe : 'response'});
+      dado.subscribe( result => {
+        this.alertNestaPagina("Sucesso","Dados do funcionario atualizado!");
+      }, 
+      (error: any) => this.alertNestaPagina("Falha","Falha ao atualizar dados."));
     }
   }
   confirmaSenha(outroCampo: string) {
