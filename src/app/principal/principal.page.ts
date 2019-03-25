@@ -19,7 +19,6 @@ export class PrincipalPage implements OnInit {
     private alert: AlertController
   ){
     this.eventos = this.iniciarEventos();
-    console.log(this.eventos)
   }
 
   ngOnInit() {
@@ -31,6 +30,10 @@ export class PrincipalPage implements OnInit {
       this.eventos = res.body;
     },(error: any) => this.alertNestaPagina("Falha","Falha ao buscar eventos")
     );
+  }
+
+  reload(){
+    window.location.reload();
   }
 
   async adicionarEvento(){

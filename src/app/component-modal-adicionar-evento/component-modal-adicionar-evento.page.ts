@@ -37,6 +37,7 @@ export class ComponentModalAdicionarEventoPage implements OnInit {
 
   fechar(){
     this.modalCtrl.dismiss();
+    window.location.reload();
   }
   
   cadastrar(){
