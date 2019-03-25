@@ -37,15 +37,16 @@ export class ModalAdicionarProjetoPage implements OnInit {
   adicionarProjeto(){
     let url = "http://localhost:8081/projetos/";
     this.http.post(url,this.form.value,{ observe: 'response' }).subscribe(res =>{
-      this.form.reset();
+      this.form.reset();  
       this.alertNestaPagina("Sucesso","Novo Projeto cadastrado com sucesso");
     },(error: any) => this.alertNestaPagina("Falha","Falha no cadastro.")
     );
   }
 
-  //fecha o modal
+  //fecha a modal
   fechar(){
     this.modalCtrl.dismiss();
+    window.location.reload();
   }
 
   //imprime a mesagem passada
