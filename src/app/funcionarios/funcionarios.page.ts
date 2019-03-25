@@ -23,17 +23,17 @@ export class FuncionariosPage implements OnInit {
   getDados() {
     let url = 'http://localhost:8081/funcionarios/';
     let dado: Observable<any> = this.http.get(url);
-    dado.subscribe(result => {
-      this.funcionarios = result
+    dado.subscribe(result=>{
+      this.funcionarios = result;
     });
 
   }
   redirecionarPagina(acao: string, email: string) {
     if (acao == "cadastrar") {
-      this.navCtrl.navigateForward(`update-funcionarios/${null}`);
+      this.navCtrl.navigateForward(`update-funcionarios/" "`);
     } 
     else if (acao == "atualizar") {
-      console.log(email)
+      console.log(email);
       this.navCtrl.navigateForward(`update-funcionarios/${email}`);
     }
   }

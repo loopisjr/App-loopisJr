@@ -8,23 +8,27 @@
   <ion-row justify-content-center aling-items-center>
     <H1>Loopis</H1>
   </ion-row>
-  <ion-item>
-    <ion-label position="floating">Usuario</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Senha</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-  <br />
-  <div>
-    <ion-checkbox color="primary"></ion-checkbox> Root
-  </div>
-  <br/><br/><br/>
-  <ion-row justify-content-center align-items-center>
-    <ion-button expanded="block" (click)="comecar()" >Login</ion-button>
-    <ion-button expanded="block" (click)="api_get()" >teste</ion-button>
-  </ion-row>
-  
+  <form #formulario="ngForm"(ngSubmit)="validar(formulario)" >
+    <ion-item>
+      <ion-label type="text" position="floating">Usuario</ion-label>
+      <ion-input ngModel name="email" required email></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label type="text" position="floating">Senha</ion-label>
+      <ion-input type="password" ngModel name="senha"></ion-input>
+    </ion-item>
+    <br />
+    <!--tirar - do ngModel para pegar valor do botão root-->
+    <ion-item>
+      <ion-checkbox color="primary" ng-Model="root" name="tipo" margin></ion-checkbox>
+      <ion-label type="text">Root</ion-label>
+    </ion-item>
+
+    <br /><br /><br />
+    <ion-row justify-content-center align-items-center>
+      <ion-button expanded="block" type="submit">Login</ion-button>
+    </ion-row>
+  </form>
+
 
 </ion-content>

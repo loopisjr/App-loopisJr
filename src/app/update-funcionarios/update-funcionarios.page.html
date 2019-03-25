@@ -1,39 +1,56 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Funcionarios</ion-title>
+    <ion-title>UpdateFuncionarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <form *ngIf="funcionario!=null">
+  <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
     <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" name="nome"></ion-input>
+      <ion-label type="text" position="floating">Nome</ion-label>
+      <ion-input formControlName="nome"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Senha</ion-label>
-      <ion-input type="text" name="nome"></ion-input>
+      <ion-label type="text" position="floating">Usuario Git</ion-label>
+      <ion-input formControlName="userGit"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Confirma a Senha</ion-label>
-      <ion-input type="text" name="nome"></ion-input>
+      <ion-label type="text" position="floating">Email</ion-label>
+      <ion-input formControlName="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Nome</ion-label>
-      <ion-input type="text" name="nome"></ion-input>
+      <ion-label type="text" position="floating">Senha</ion-label>
+      <ion-input type="password" formControlName="senha"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Cargo</ion-label>
-      <ion-input type="text" name="nome"></ion-input>
+      <ion-label type="text" position="floating">Confirma Senha</ion-label>
+      <ion-input type="password" formControlName="senhaConfirmar"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Habilidades</ion-label>
-      <ion-input type="text" name="nome"></ion-input>
+      <ion-label type="text" position="floating">Cargo</ion-label>
+      <ion-input formControlName="cargo"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Projetos</ion-label>
-      <ion-input type="text" name="nome"></ion-input>
+      <ion-label type="text" position="floating">Habilidades</ion-label>
+      <ion-input formControlName="habilidades"></ion-input>
     </ion-item>
-    <ion-button type="submit">Atualizar</ion-button>
+    <!--<ion-item>
+      <ion-label  type="text" position="floating">Projetos</ion-label>
+      <ion-input formControlName="projetos"></ion-input>
+    </ion-item>-->
+    <ion-item>
+      <ion-checkbox color="primary" formControlName="root" margin></ion-checkbox>
+      <ion-label type="text">Root</ion-label>
+    </ion-item>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button type="submit" (click)=update()>Atualizar</ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button color="danger" type="submit">Remover</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 </ion-content>
