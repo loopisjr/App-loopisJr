@@ -36,15 +36,15 @@
     </ion-item>
     <ion-item>
       <ion-checkbox color="primary" formControlName="tipo" margin></ion-checkbox>
-      <ion-label type="text">Root</ion-label>
+      <ion-label type="text">Root {{usuarioNormal}}</ion-label>
     </ion-item>
     <ion-grid fixed>
       <ion-row>
         <ion-col size="6">
-          <ion-button type="submit" (click)="update()" [disabled]="formulario.invalid">{{updateMetodo}}</ion-button>
+          <ion-button type="submit" (click)="update()" [disabled]="formulario.invalid || funcionarioNormal">{{updateMetodo}}</ion-button>
         </ion-col>
-        <ion-col size="6" *ngIf="updateMetodo=='atualizar'">
-          <ion-button color="danger" type="submit" (click)="presentAlertConfirm()">Remover</ion-button>
+        <ion-col size="6" *ngIf="(updateMetodo=='atualizar')">
+          <ion-button color="danger" type="submit" (click)="presentAlertConfirm()" [disabled]="funcionarioNormal">Remover</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

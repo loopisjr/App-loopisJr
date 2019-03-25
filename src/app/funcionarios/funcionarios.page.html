@@ -5,7 +5,7 @@
 </ion-header>
           
 <ion-content padding>
-    <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab *ngIf="!funcionarioNormal" vertical="top" horizontal="end" edge slot="fixed">
         <ion-fab-button (click)="redirecionarPagina('cadastrar', '')">
             <ion-icon name="person-add"></ion-icon>
         </ion-fab-button>

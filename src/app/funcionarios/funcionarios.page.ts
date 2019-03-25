@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./funcionarios.page.scss']
 })
 export class FuncionariosPage implements OnInit {
-
+  funcionarioNormal = false;
   funcionarios: any;
   constructor(public navCtrl: NavController, public http: HttpClient) {
     this.getDados();
@@ -32,7 +32,7 @@ export class FuncionariosPage implements OnInit {
       this.navCtrl.navigateForward(`update-funcionarios/${acao}/" "`);
     } 
     else if (acao == "atualizar") {
-      this.navCtrl.navigateForward(`update-funcionarios/${acao}/${email}`, {replaceUrl:true});
+      this.navCtrl.navigateForward(`update-funcionarios/${acao}/${email}`);
     }
   }
 }

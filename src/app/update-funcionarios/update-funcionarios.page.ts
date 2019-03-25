@@ -12,11 +12,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./update-funcionarios.page.scss'],
 })
 export class UpdateFuncionariosPage implements OnInit {
-
   formulario: FormGroup;
   funcionario: Funcionario;
   emailFuncionario = "";
   updateMetodo = "";
+  funcionarioNormal = false;
   constructor(
     private formBuilder: FormBuilder,
     public http: HttpClient,
@@ -29,14 +29,14 @@ export class UpdateFuncionariosPage implements OnInit {
     this.emailFuncionario = this.ativatedRoute.snapshot.paramMap.get("email");
     this.updateMetodo = this.ativatedRoute.snapshot.paramMap.get("acao");
     this.formulario = this.formBuilder.group({
-      nome: [null, Validators.required],
-      email: new FormControl({ value: null, disabled: (this.updateMetodo == "atualizar") }, Validators.required),
-      senha: [null, [Validators.minLength(6), Validators.required]],
-      senhaConfirmar: [null, [this.confirmaSenha("senha"), Validators.required]],
-      cargo: [null, Validators.required],
-      habilidades: [null, Validators.required],
-      perfilGithub: [null, Validators.required],
-      tipo: [false, Validators.required]
+      nome: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required],
+      email: [{value: null, disabled: (this.updateMetodo == "atualizar") }, Validators.required],
+      senha: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, [Validators.minLength(6), Validators.required]],
+      senhaConfirmar: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, [this.confirmaSenha("senha"), Validators.required]],
+      cargo: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required],
+      habilidades: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required],
+      perfilGithub: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required],
+      tipo: [{value:false, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required]
     });
     if (this.updateMetodo == "atualizar") {
       this.buscarFuncionario();
@@ -84,6 +84,7 @@ export class UpdateFuncionariosPage implements OnInit {
       let dado: Observable<any> = this.http.put(url, this.funcionario, { observe: 'response' });
       dado.subscribe(result => {
         this.alertNestaPagina("Sucesso", "Dados do funcionario atualizado!");
+        this.navCtrl.navigateForward(`tabs/funcionarios`);
       },
         (error: any) => this.alertNestaPagina("Falha", "Falha ao atualizar dados."));
     }
@@ -117,18 +118,18 @@ export class UpdateFuncionariosPage implements OnInit {
 
   async presentAlertConfirm() {
     const alert = await this.alert.create({
-      header: 'Confirm!',
-      message: 'Message <strong>text</strong>!!!',
+      header: 'Confirmação!',
+      message: 'Você deseja realmente apagar estes dados?!',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
             console.log('Cancel');
           }
         }, {
-          text: 'Okay',
+          text: 'Confirmar',
           handler: () => {
             this.removerFuncionario();
           }
