@@ -18,19 +18,19 @@ export class UpdateFuncionariosPage implements OnInit {
   emailFuncionario = "";
   updateMetodo = "";
   constructor(
-    private formBuilder: FormBuilder, 
-    public http: HttpClient, 
-    public ativatedRoute: ActivatedRoute, 
+    private formBuilder: FormBuilder,
+    public http: HttpClient,
+    public ativatedRoute: ActivatedRoute,
     private alert: AlertController,
     private navCtrl: NavController
-    ) {}
+  ) { }
 
   ngOnInit() {
     this.emailFuncionario = this.ativatedRoute.snapshot.paramMap.get("email");
     this.updateMetodo = this.ativatedRoute.snapshot.paramMap.get("acao");
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
-      email: new FormControl({value: null, disabled: (this.updateMetodo=="atualizar")}, Validators.required),
+      email: new FormControl({ value: null, disabled: (this.updateMetodo == "atualizar") }, Validators.required),
       senha: [null, [Validators.minLength(6), Validators.required]],
       senhaConfirmar: [null, [this.confirmaSenha("senha"), Validators.required]],
       cargo: [null, Validators.required],
@@ -38,7 +38,7 @@ export class UpdateFuncionariosPage implements OnInit {
       perfilGithub: [null, Validators.required],
       tipo: [false, Validators.required]
     });
-    if(this.updateMetodo=="atualizar"){
+    if (this.updateMetodo == "atualizar") {
       this.buscarFuncionario();
     }
   }
@@ -58,9 +58,9 @@ export class UpdateFuncionariosPage implements OnInit {
       });
     });
   }
-  
+
   update() {
-    let tipo = (this.formulario.get("tipo").value)?"ROOT":"NORMAL";
+    let tipo = (this.formulario.get("tipo").value) ? "ROOT" : "NORMAL";
     this.funcionario = new Funcionario(
       this.formulario.get("email").value,
       this.formulario.get("senha").value,
@@ -71,23 +71,33 @@ export class UpdateFuncionariosPage implements OnInit {
       tipo
     );
 
-    if(this.updateMetodo === "cadastrar"){
+    if (this.updateMetodo === "cadastrar") {
       let url = 'http://localhost:8081/funcionarios/';
-      let dado: Observable<any> = this.http.post(url, this.funcionario, { observe : 'response'});
-      dado.subscribe( result => {
-        this.alertNestaPagina("Sucesso","Novo funcionario cadastrado!");
+      let dado: Observable<any> = this.http.post(url, this.funcionario, { observe: 'response' });
+      dado.subscribe(result => {
+        this.alertNestaPagina("Sucesso", "Novo funcionario cadastrado!");
         this.navCtrl.navigateForward(`tabs/funcionarios`);
-      }, 
-      (error: any) => this.alertNestaPagina("Falha","Falha ao cadastrar funcionario."));
-    }else if(this.updateMetodo === "atualizar"){
+      },
+        (error: any) => this.alertNestaPagina("Falha", "Falha ao cadastrar funcionario."));
+    } else if (this.updateMetodo === "atualizar") {
       let url = 'http://localhost:8081/funcionarios/';
-      let dado: Observable<any> = this.http.put(url, this.funcionario, { observe : 'response'});
-      dado.subscribe( result => {
-        this.alertNestaPagina("Sucesso","Dados do funcionario atualizado!");
-      }, 
-      (error: any) => this.alertNestaPagina("Falha","Falha ao atualizar dados."));
+      let dado: Observable<any> = this.http.put(url, this.funcionario, { observe: 'response' });
+      dado.subscribe(result => {
+        this.alertNestaPagina("Sucesso", "Dados do funcionario atualizado!");
+      },
+        (error: any) => this.alertNestaPagina("Falha", "Falha ao atualizar dados."));
     }
   }
+
+  removerFuncionario() {
+    let url = 'http://localhost:8081/funcionarios/'.concat(this.emailFuncionario);
+    let dado: Observable<any> = this.http.delete(url, { observe: 'response' });
+    dado.subscribe(result => {
+      this.alertNestaPagina("Sucesso", "Funcionario removido com sucesso!");
+      this.navCtrl.navigateForward(`tabs/funcionarios`);
+    });
+  }
+
   confirmaSenha(outroCampo: string) {
     const validator = (formControl: FormControl) => {
       if (outroCampo == null) {
@@ -105,11 +115,35 @@ export class UpdateFuncionariosPage implements OnInit {
     return validator;
   }
 
-  async alertNestaPagina(titulo,msg){
+  async presentAlertConfirm() {
+    const alert = await this.alert.create({
+      header: 'Confirm!',
+      message: 'Message <strong>text</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Cancel');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.removerFuncionario();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async alertNestaPagina(titulo, msg) {
     const novoAlert = await this.alert.create({
-      header : titulo,
-      subHeader : msg,
-      buttons : ['OK']
+      header: titulo,
+      subHeader: msg,
+      buttons: ['OK']
     });
     await novoAlert.present();
   }

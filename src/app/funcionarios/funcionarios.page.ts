@@ -12,11 +12,10 @@ import { HttpClient } from '@angular/common/http';
 export class FuncionariosPage implements OnInit {
 
   funcionarios: any;
-  // email: string;
   constructor(public navCtrl: NavController, public http: HttpClient) {
     this.getDados();
   }
-
+  
   ngOnInit() {
   }
 
@@ -33,8 +32,7 @@ export class FuncionariosPage implements OnInit {
       this.navCtrl.navigateForward(`update-funcionarios/${acao}/" "`);
     } 
     else if (acao == "atualizar") {
-      console.log(email);
-      this.navCtrl.navigateForward(`update-funcionarios/${acao}/${email}`);
+      this.navCtrl.navigateForward(`update-funcionarios/${acao}/${email}`, {replaceUrl:true});
     }
   }
 }
