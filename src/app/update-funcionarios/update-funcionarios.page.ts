@@ -11,12 +11,20 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './update-funcionarios.page.html',
   styleUrls: ['./update-funcionarios.page.scss'],
 })
+/* 
+    Há um problema de que quando o usuário logado é diferente do usuário escolhido e
+  o usuario logado é usuario ROOT, não é possível apertar o botão de atualizar porque 
+  não se tem a senha do usuário ou seja nem todos os campos estão preenchidos e tambem por isto
+  não é possivel fazer a atualização porque não há uma função especifica para atualizar cargo.
+*/
 export class UpdateFuncionariosPage implements OnInit {
   formulario: FormGroup;
   funcionario: Funcionario;
-  emailFuncionario = "";
-  updateMetodo = "";
-  funcionarioNormal = false;
+  emailFuncionario="";
+  updateMetodo:String;
+  funcionarioNormal:boolean;
+  emailLogado:String;
+
   constructor(
     private formBuilder: FormBuilder,
     public http: HttpClient,
@@ -26,17 +34,19 @@ export class UpdateFuncionariosPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.emailLogado = "testerson@gmail.comm";//será informado atravez do atributo de sessão
+    this.funcionarioNormal = false;//será informado atravez do atributo de sessão
     this.emailFuncionario = this.ativatedRoute.snapshot.paramMap.get("email");
     this.updateMetodo = this.ativatedRoute.snapshot.paramMap.get("acao");
     this.formulario = this.formBuilder.group({
-      nome: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required],
-      email: [{value: null, disabled: (this.updateMetodo == "atualizar") }, Validators.required],
-      senha: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, [Validators.minLength(6), Validators.required]],
-      senhaConfirmar: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, [this.confirmaSenha("senha"), Validators.required]],
-      cargo: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required],
-      habilidades: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required],
-      perfilGithub: [{value:null, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required],
-      tipo: [{value:false, disabled:this.funcionarioNormal&&(this.updateMetodo == "atualizar")}, Validators.required]
+      nome: [null, Validators.required],
+      email: [null, Validators.required],
+      senha: [null, [Validators.minLength(6), Validators.required]],
+      senhaConfirmar: [null, [this.confirmaSenha("senha"), Validators.required]],
+      cargo: [null, Validators.required],
+      habilidades: [null, Validators.required],
+      perfilGithub: [null, Validators.required],
+      tipo: [false, Validators.required]
     });
     if (this.updateMetodo == "atualizar") {
       this.buscarFuncionario();
@@ -57,6 +67,16 @@ export class UpdateFuncionariosPage implements OnInit {
         tipo: (result.tipo == "ROOT")
       });
     });
+    let tipo = (this.formulario.get("tipo").value) ? "ROOT" : "NORMAL";
+    this.funcionario = new Funcionario(
+      this.formulario.get("email").value,
+      this.formulario.get("senha").value,
+      this.formulario.get("nome").value,
+      this.formulario.get("cargo").value,
+      this.formulario.get("perfilGithub").value,
+      this.formulario.get("habilidades").value,
+      tipo
+    );
   }
 
   update() {

@@ -6,47 +6,82 @@
 
 <ion-content padding>
   <form [formGroup]="formulario">
-    <ion-item>
-      <ion-label type="text" position="floating">Nome</ion-label>
-      <ion-input formControlName="nome"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label type="text" position="floating">Usuario Git</ion-label>
-      <ion-input formControlName="perfilGithub"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label type="text" position="floating">Email</ion-label>
-      <ion-input formControlName="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label type="text" position="floating">Senha(no mínimo 6 dígitos)</ion-label>
-      <ion-input type="password" formControlName="senha"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label type="text" position="floating">Confirma Senha</ion-label>
-      <ion-input type="password" formControlName="senhaConfirmar"></ion-input>
-    </ion-item>
-    <ion-item>
+    
+    <div *ngIf="(updateMetodo=='atualizar' && emailLogado==emailFuncionario || updateMetodo=='cadastrar')">
+      <ion-item>
+        <ion-label type="text" position="floating">Nome</ion-label>
+        <ion-input formControlName="nome"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label type="text" position="floating">Usuario Git</ion-label>
+        <ion-input formControlName="perfilGithub"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label type="text" position="floating">Email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label type="text" position="floating">Senha(no mínimo 6 dígitos)</ion-label>
+        <ion-input type="password" formControlName="senha"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label type="text" position="floating">Confirma Senha</ion-label>
+        <ion-input type="password" formControlName="senhaConfirmar"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label type="text" position="floating">Habilidades</ion-label>
+        <ion-input formControlName="habilidades"></ion-input>
+      </ion-item>
+      <!--<ion-item>
+        <ion-label type="text" position="floating">Cargo</ion-label>
+        <ion-input formControlName="cargo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-checkbox color="primary" formControlName="tipo" margin></ion-checkbox>
+        <ion-label type="text">Root {{usuarioNormal}}</ion-label>
+      </ion-item>-->
+    </div>
+    <!-------------------------------------------------------------------------------------------------->
+    <ion-list *ngIf="(updateMetodo=='atualizar' && emailLogado!=emailFuncionario)">
+      <ion-item>
+        <ion-label>Nome : {{funcionario.nome}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Usuario Git : {{funcionario.perfilGithub}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email : {{funcionario.email}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Habilidades : {{funcionario.habilidades}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="(funcionarioNormal)">
+        <ion-label>Cargo : {{funcionario.cargo}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="(funcionarioNormal)">
+        <ion-label>Tipo de conta : {{funcionario.tipo}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <!-------------------------------------------------------------------------------------------------->
+    <ion-item *ngIf="((emailLogado!=emailFuncionario && !funcionarioNormal) || emailLogado==emailFuncionario) || updateMetodo=='cadastrar'">
       <ion-label type="text" position="floating">Cargo</ion-label>
       <ion-input formControlName="cargo"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label type="text" position="floating">Habilidades</ion-label>
-      <ion-input formControlName="habilidades"></ion-input>
-    </ion-item>
-    <ion-item>
+    <ion-item *ngIf="((emailLogado!=emailFuncionario && !funcionarioNormal) || emailLogado==emailFuncionario) || updateMetodo=='cadastrar'">
       <ion-checkbox color="primary" formControlName="tipo" margin></ion-checkbox>
       <ion-label type="text">Root {{usuarioNormal}}</ion-label>
     </ion-item>
+    <!-------------------------------------------------------------------------------------------------->
     <ion-grid fixed>
       <ion-row>
-        <ion-col size="6">
-          <ion-button type="submit" (click)="update()" [disabled]="formulario.invalid || funcionarioNormal">{{updateMetodo}}</ion-button>
+        <ion-col size="6" *ngIf="((emailLogado!=emailFuncionario && !funcionarioNormal) || emailLogado==emailFuncionario || updateMetodo=='cadastrar')">
+          <ion-button type="submit" (click)="update()" [disabled]="formulario.invalid">{{updateMetodo}}</ion-button>
         </ion-col>
-        <ion-col size="6" *ngIf="(updateMetodo=='atualizar')">
-          <ion-button color="danger" type="submit" (click)="presentAlertConfirm()" [disabled]="funcionarioNormal">Remover</ion-button>
+        <ion-col size="6" *ngIf="(updateMetodo=='atualizar' && (!funcionarioNormal || emailLogado==emailFuncionario))">
+          <ion-button color="danger" type="submit" (click)="presentAlertConfirm()">Remover</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
+
   </form>
 </ion-content>
