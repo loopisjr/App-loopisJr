@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ModalAdicionarProjetoPage } from './modal-adicionar-projeto.page';
+import { ModalProjetoPage } from './modal-projeto.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ModalAdicionarProjetoPage
+    component: ModalProjetoPage
   }
 ];
 
@@ -23,6 +23,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     
   ],
-  declarations: [ModalAdicionarProjetoPage]
+  declarations: [ModalProjetoPage]
 })
-export class ModalAdicionarProjetoPageModule {}
+export class ModalProjetoPageModule {}

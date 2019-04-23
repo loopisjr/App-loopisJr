@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentModalAdicionarEventoPageModule } from './component-modal-adicionar-evento/component-modal-adicionar-evento.module';
-import { ModalAdicionarProjetoPageModule } from './modal-adicionar-projeto/modal-adicionar-projeto.module';
+import { ModalProjetoPageModule } from './modal-projeto/modal-projeto.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -18,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
             IonicModule.forRoot(),
             AppRoutingModule,
             ComponentModalAdicionarEventoPageModule,
-            ModalAdicionarProjetoPageModule,
+            ModalProjetoPageModule,
             HttpClientModule,
             ReactiveFormsModule,
           ],

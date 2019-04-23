@@ -4,11 +4,11 @@ import { ModalController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-modal-adicionar-projeto',
-  templateUrl: './modal-adicionar-projeto.page.html',
-  styleUrls: ['./modal-adicionar-projeto.page.scss'],
+  selector: 'app-modal-projeto',
+  templateUrl: './modal-projeto.page.html',
+  styleUrls: ['./modal-projeto.page.scss'],
 })
-export class ModalAdicionarProjetoPage implements OnInit {
+export class ModalProjetoPage implements OnInit {
 
   form: FormGroup;
   

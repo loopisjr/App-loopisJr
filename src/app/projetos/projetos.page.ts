@@ -1,7 +1,7 @@
 import { AlertController, ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ModalAdicionarProjetoPage } from '../modal-adicionar-projeto/modal-adicionar-projeto.page';
+import { ModalProjetoPage } from '../modal-projeto/modal-projeto.page';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class ProjetosPage implements OnInit {
   // ABRE UM MODAL
   async adicionarProjeto(){
     const modal = await this.modalCtrl.create({
-      component: ModalAdicionarProjetoPage
+      component: ModalProjetoPage
     });
     return await modal.present();
   }
