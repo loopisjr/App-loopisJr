@@ -22,5 +22,9 @@
                 <a href="#">{{projeto.emailContratante}}</a>
             </ion-item>
         </ion-card-content>
+        <ion-chip (click)="maisSobreProjeto(projeto)">
+           <ion-label>Mais sobre o projeto</ion-label>
+           <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-chip>
     </ion-card>
 </ion-content>

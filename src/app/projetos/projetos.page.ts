@@ -1,7 +1,9 @@
+import { Funcionario } from './../../model/Funcionario';
 import { AlertController, ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ModalAdicionarProjetoPage } from '../modal-adicionar-projeto/modal-adicionar-projeto.page';
+import { ModalProjetoSobrePage } from './../modal-projeto-sobre/modal-projeto-sobre.page';
 
 
 @Component({
@@ -13,6 +15,8 @@ export class ProjetosPage implements OnInit {
 
   root: boolean = true;
   projetos: any;
+  projetoSelecionado = null;
+
 
   constructor(
     private http: HttpClient,
@@ -33,7 +37,7 @@ export class ProjetosPage implements OnInit {
     );
   }
 
-  // ABRE UM MODAL
+  // ABRE UMA MODAL
   async adicionarProjeto(){
     const modal = await this.modalCtrl.create({
       component: ModalAdicionarProjetoPage
@@ -41,12 +45,27 @@ export class ProjetosPage implements OnInit {
     return await modal.present();
   }
 
-  async alertNestaPagina(titulo,msg){
+  async sobreProjeto(){
+    const modal = await this.modalCtrl.create({
+      component: ModalProjetoSobrePage,
+      componentProps: {
+        'projetoSelecionado': this.projetoSelecionado
+      }
+    });
+    return await modal.present();
+  }
+
+  async alertNestaPagina(titulo, msg){
     const novoAlert = await this.alert.create({
       header : titulo,
       subHeader : msg,
       buttons : ['OK']
     });
     await novoAlert.present();
+  }
+
+  maisSobreProjeto(projeto){
+    this.projetoSelecionado = projeto;
+    this.sobreProjeto();    
   }
 }

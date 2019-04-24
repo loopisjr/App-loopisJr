@@ -1,3 +1,4 @@
+import { ModalProjetoSobrePageModule } from './modal-projeto-sobre/modal-projeto-sobre.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
             AppRoutingModule,
             ComponentModalAdicionarEventoPageModule,
             ModalAdicionarProjetoPageModule,
+            ModalProjetoSobrePageModule,
             HttpClientModule,
             ReactiveFormsModule,
           ],
