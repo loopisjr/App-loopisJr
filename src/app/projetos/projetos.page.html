@@ -22,5 +22,10 @@
                 <a href="#">{{projeto.emailContratante}}</a>
             </ion-item>
         </ion-card-content>
+        <ion-buttons slot="end">
+            <ion-button color="ligth" *ngIf="root" (click)="atualizarProjeto(projeto)">
+                <ion-icon name="create"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-card>
 </ion-content>

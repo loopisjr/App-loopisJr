@@ -2,7 +2,7 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ModalProjetoPage } from '../modal-projeto/modal-projeto.page';
-
+import { Projeto } from '../../model/projeto';
 
 @Component({
   selector: 'app-projetos',
@@ -11,7 +11,7 @@ import { ModalProjetoPage } from '../modal-projeto/modal-projeto.page';
 })
 export class ProjetosPage implements OnInit {
 
-  root: boolean = true;
+  root: boolean = false;
   projetos: any;
 
   constructor(
@@ -21,7 +21,7 @@ export class ProjetosPage implements OnInit {
   ) {
     this.iniciarProjetos();
   }
-
+  
   ngOnInit() {
   }
   
@@ -36,7 +36,16 @@ export class ProjetosPage implements OnInit {
   // ABRE UM MODAL
   async adicionarProjeto(){
     const modal = await this.modalCtrl.create({
-      component: ModalProjetoPage
+      component: ModalProjetoPage,
+      componentProps: {acao:"Cadastrar"}
+    });
+    return await modal.present();
+  }
+
+  async atualizarProjeto(projeto:Projeto){
+    const modal = await this.modalCtrl.create({
+      component: ModalProjetoPage,
+      componentProps: {projeto:projeto, acao:"Atualizar"}
     });
     return await modal.present();
   }

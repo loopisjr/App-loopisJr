@@ -8,7 +8,8 @@
 <ion-content padding>
   <ion-card padding>
     <ion-col>
-      <form (ngSubmit)="adicionarProjeto()" [formGroup]="form">
+      <form [formGroup]="form">
+        <ion-input formControlName="id" type="hidden"></ion-input>
         <ion-item>
           <ion-label position="stacked">Nome</ion-label>
           <ion-input formControlName="titulo"></ion-input>
@@ -34,10 +35,12 @@
           <ion-input formControlName="descricao"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-button (click)="limpar()">Limpar</ion-button>
-          <ion-button slot="end" [disabled]="form.invalid" type="submit">Enviar <ion-icon name="send"></ion-icon></ion-button>
+          <ion-button [disabled]="form.invalid" type="submit" (click)="updateProjetos()">{{acao}}<ion-icon name="send"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" color="danger" type="submit" (click)="presentAlertConfirm()" *ngIf="acao=='Atualizar'">Remover<ion-icon name="trash"></ion-icon>
+          </ion-button>
         </ion-item>
       </form>
     </ion-col>
   </ion-card>
-  </ion-content>
+</ion-content>
