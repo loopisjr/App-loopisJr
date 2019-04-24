@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController, AlertController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-modal-adicionar-projeto',
@@ -18,7 +18,7 @@ export class ModalAdicionarProjetoPage implements OnInit {
     private http: HttpClient,
     private alert: AlertController
   ) {
-    
+
   }
 
   // CONFIGURAÇÔES DO FORMULÀRIO

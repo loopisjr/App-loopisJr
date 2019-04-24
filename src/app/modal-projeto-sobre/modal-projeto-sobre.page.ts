@@ -24,7 +24,7 @@ export class ModalProjetoSobrePage implements OnInit {
   ) {
     this.funcionarios = this.getFuncionarios();
     this.form = formBuilder.group({
-      funcionariosSelecionados: this.formBuilder.array(['teste'])
+      funcionariosSelecionados: this.formBuilder.array([])
     })
    }
 
@@ -62,9 +62,9 @@ export class ModalProjetoSobrePage implements OnInit {
   atualizarLista(funcionario: Funcionario,isSelecionado){
     const funcionariosSelecionados = <FormArray>this.form.controls.funcionariosSelecionados;
     if(isSelecionado.currentTarget.checked){
-      console.log(new FormControl(funcionario));
-      funcionariosSelecionados.push(new FormControl(funcionario));
-      console.log(this.form.get("funcionariosSelecionados").value);
+      // console.log(new FormControl(funcionario));
+      funcionariosSelecionados.push(this.formBuilder.group(funcionario));
+      // console.log(this.form.get("funcionariosSelecionados").value);
     }else{
       let index = funcionariosSelecionados.controls.findIndex(x => x.value.email === funcionario.email);
       funcionariosSelecionados.removeAt(index);
