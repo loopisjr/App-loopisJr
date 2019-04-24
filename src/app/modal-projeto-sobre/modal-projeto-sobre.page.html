@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <p slot="end" margin (click)="fechar()">FECHAR</p>
+    <ion-title>Projeto {{projetoSelecionado.titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label>Nome: {{projetoSelecionado.titulo}}</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>Contratante: {{projetoSelecionado.nomeContratante}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Entrega: {{projetoSelecionado.dataEntrega | date: 'dd/MM/yyyy'}}</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>Telefone: {{projetoSelecionado.telefone}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        {{projetoSelecionado.descricao}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+     <ion-col>
+      Email: <a href="#">{{projetoSelecionado.emailContratante}}</a>
+     </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Funcionários vinculados ao projeto:</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let funcionarioProjeto of projetoSelecionado.funcionarios">
+      <ion-label>{{funcionarioProjeto.nome}} - {{funcionarioProjeto.cargo}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Adicionar Funcionários ao projeto</ion-label>
+    </ion-list-header>
+    <form (ngSubmit)="vincularFuncionarios()" [formGroup]="form">
+      <ion-list *ngFor="let funcionario of funcionarios">
+        <ion-item>
+          <ion-checkbox (ionChange)="atualizarLista(funcionario, $event)"></ion-checkbox>
+          <ion-label value="funcionario">{{funcionario.nome}} - {{funcionario.cargo}}</ion-label>
+        </ion-item>
+      </ion-list>
+    <ion-button type="submit">Adicionar</ion-button>
+    </form>
+  </ion-list>
+</ion-content>
