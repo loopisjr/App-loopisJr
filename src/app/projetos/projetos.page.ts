@@ -1,10 +1,9 @@
-import { Funcionario } from './../../model/Funcionario';
 import { AlertController, ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ModalAdicionarProjetoPage } from '../modal-adicionar-projeto/modal-adicionar-projeto.page';
 import { ModalProjetoSobrePage } from './../modal-projeto-sobre/modal-projeto-sobre.page';
-
+import { ModalProjetoPage } from '../modal-projeto/modal-projeto.page';
+import { Projeto } from '../../model/projeto';
 
 @Component({
   selector: 'app-projetos',
@@ -25,7 +24,7 @@ export class ProjetosPage implements OnInit {
   ) {
     this.iniciarProjetos();
   }
-
+  
   ngOnInit() {
   }
   
@@ -40,7 +39,16 @@ export class ProjetosPage implements OnInit {
   // ABRE UMA MODAL
   async adicionarProjeto(){
     const modal = await this.modalCtrl.create({
-      component: ModalAdicionarProjetoPage
+      component: ModalProjetoPage,
+      componentProps: {acao:"Cadastrar"}
+    });
+    return await modal.present();
+  }
+
+  async atualizarProjeto(projeto:Projeto){
+    const modal = await this.modalCtrl.create({
+      component: ModalProjetoPage,
+      componentProps: {projeto:projeto, acao:"Atualizar"}
     });
     return await modal.present();
   }

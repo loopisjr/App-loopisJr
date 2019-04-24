@@ -26,5 +26,10 @@
            <ion-label>Mais sobre o projeto</ion-label>
            <ion-icon name="information-circle-outline"></ion-icon>
         </ion-chip>
+        <ion-buttons slot="end">
+            <ion-button color="ligth" *ngIf="root" (click)="atualizarProjeto(projeto)">
+                <ion-icon name="create"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-card>
 </ion-content>
